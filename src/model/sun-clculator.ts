@@ -37,6 +37,21 @@ export class SunCalculator {
         return this._getSecondToday() / secondsDuringOneDay;
     }
 
+    public getLightTimeInText() {
+        return this._convertHoursToHoursAndMinutes(this.daylightHours)
+    }
+
+    public getDarkTimeInText() {
+        return this._convertHoursToHoursAndMinutes(24 - this.daylightHours);
+    }
+
+    private _convertHoursToHoursAndMinutes(hours: number) {
+        const intHours = Math.floor(hours);
+        const intMinutes = Math.round((hours - intHours) * 60);
+        
+        return ("0" + intHours).slice(-2) + "h : " + ("0" + intMinutes).slice(-2) + "m";
+    }
+
     private _getSecondToday() {
         return this.date.getHours() * 3600 + this.date.getMinutes() * 60 + this.date.getSeconds();
     }
